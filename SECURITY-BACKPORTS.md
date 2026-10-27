@@ -2,9 +2,13 @@
 
 Unreleased candidate based on official Laravel v11.57.0, commit
 `4fc41929c95024795d83a54309aa4e9922f74263`, MIT license retained.
-This checkout remains named laravel/framework for genuine base-root testing;
-proposed publication identity is flashasia/framework 11.57.1, pending independent
-review, exact self.version replacement and real consumer installation proof.
+This checkout is flashasia/framework on its real 11.x branch (11.x-dev).
+The proposed stable release is 11.57.1, pending independent review and publication.
+All upstream Illuminate replacements are preserved; laravel/framework is replaced
+only at self.version. A separate mirrored path consumer installs this package
+through its genuine branch version while requiring laravel/framework ^11.57.
+Composer InstalledVersions reports original identity installed/replaced, but its
+getVersion/getPrettyVersion return null; getVersionRanges returns 11.x-dev.
 Application::VERSION remains the upstream base version, not Laravel 12.
 
 - TokenGuard GHSA-f9x3-7vq9-cph6: both protections from official commit
@@ -33,6 +37,15 @@ is not framework security proof because Composer does not audit its root package
 Isolated PHP 8.3.28 and 8.4.17 checks: 29 security tests / 196 assertions each;
 26 signing integration tests / 67 assertions each; 17 selected route generation
 tests / 70 assertions, with one existing upstream skipped case (PR43255).
-No full framework suite, full application upgrade, deployment, or own-identity
-consumer installation is claimed. Evidence and file hashes are stored outside
-this source tree in the adjacent provenance.json and test receipts.
+No full framework suite, full application upgrade or deployment is claimed.
+Own-identity source and separate mirrored consumer tests use actual 11.x-dev;
+no version overrides, aliases or security exceptions are used. Source hashes
+and advisory fingerprints are retained in security-backports.json; execution
+receipts are stored outside this tree in the adjacent evidence directory.
+
+The bounded security workflow has PHP 8.3/8.4 cells only. Existing upstream
+workflows remain inherited and must be reviewed before public hosting enables
+Actions; this new workflow does not claim full-suite or browser coverage.
+The original-identity advisory inventory is retained in security-backports.json;
+root-package Composer audit alone cannot replace the consuming security gate.
+Browser execution remains PENDING; rendered HTML is not DOM-execution proof.

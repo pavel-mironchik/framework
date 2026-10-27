@@ -1,0 +1,816 @@
+{
+  "schema": 1,
+  "status": "unreleased own-identity 11.x-dev candidate; independent review and browser proof pending",
+  "upstream": {
+    "package": "laravel/framework",
+    "version": "v11.57.0",
+    "sha": "4fc41929c95024795d83a54309aa4e9922f74263",
+    "license": "MIT",
+    "metadata": "https://repo.packagist.org/p2/laravel/framework.json"
+  },
+  "identityProposal": {
+    "name": "flashasia/framework",
+    "version": "11.57.1",
+    "replaceLaravelFramework": "self.version",
+    "illuminateReplaces": "all upstream component replacements preserved at self.version",
+    "applicationVersion": "11.57.0 (base; distinguish own release in provenance)",
+    "notInstalled": false,
+    "actualDevelopmentVersion": "11.x-dev"
+  },
+  "advisoryCount": 30,
+  "applicableRecordCount": 5,
+  "families": {
+    "GHSA-f9x3-7vq9-cph6": {
+      "disposition": "already fixed in official base",
+      "source": "8dbb08bccac1be095dba4a9d259a419620f1e8a5",
+      "tests": "AuthTokenGuardTest plus non-string matrix"
+    },
+    "GHSA-5vg9-5847-vvmq": {
+      "disposition": "adapted full upstream runtime fix",
+      "source": "96e9a663db657cf37ef26cd794fda8ff60eaa451",
+      "records": 2
+    },
+    "GHSA-crmm-hgp2-wgrp": {
+      "disposition": "adapted latest routing follow-up; no upload API introduced",
+      "sources": [
+        "96b256d9186c622b828a6eacc6c746e2f33a8555",
+        "12df688e942117d201bb37ddc7bf035f2e8bf607",
+        "0d98dd29e919542e218084322db6f7ef8f005dcb"
+      ],
+      "effectiveRuntimeFix": "RouteUrlGenerator::encodeParameter; LocalFilesystemAdapter remains byte-identical to base"
+    },
+    "GHSA-jh5r-qr3c-85q8": {
+      "disposition": "base has no allowHTML true configuration; actual renderer HTML generated, browser verification pending",
+      "comparisonSource": "b495ca2ec4e15a977e8700328bf13e8a79f29d12",
+      "fixture": "renderer.html",
+      "payload": "<img src=x onerror=\"window.frameworkxss=1\">",
+      "fixtureLimit": "synthetic Request header name injected through Testbench; does not prove malformed HTTP header can pass real server",
+      "trigger": "click"
+    }
+  },
+  "validation": {
+    "sourcePhp83": "29 tests / 196 assertions PASS",
+    "sourcePhp84": "29 tests / 196 assertions PASS",
+    "routingIntegrationEachPhp": "26 tests / 67 assertions PASS",
+    "routingUnitEachPhp": "17 discovered / 70 assertions / 1 upstream skip (PR43255)",
+    "baselineEachPhp": "28 tests / 78 assertions / 5 failures before runtime fixes (earlier test snapshot)",
+    "dependencyAudit": "zero advisories / zero abandoned; root package not audited by Composer; fresh original identity inventory separately classified",
+    "fullSuite": "NOT RUN",
+    "applicationUpgrade": "NOT RUN",
+    "consumerOwnIdentity": "mirrored path dependency; no versions override; actual 11.x branch",
+    "externalCalls": "none in tests; ArrayTransport only",
+    "formatter": "changed runtime/security/serve/signing files pass; upstream RoutingUrlGeneratorTest pre-existing single_line_comment_style baseline left unchanged",
+    "ownIdentitySourcePhp83": "security 29/196; signing 26/67; route generation 17/70 with 1 existing skip",
+    "ownIdentitySourcePhp84": "security 29/196; signing 26/67; route generation 17/70 with 1 existing skip",
+    "consumerPhp83": "security 29/196; signing 26/67; installed mirrored own framework",
+    "consumerPhp84": "security 29/196; signing 26/67; installed mirrored own framework",
+    "browser": "PENDING, no browser execution; synthetic HTML only",
+    "sourceIdentityReceipt": "own-root-identity.json",
+    "consumerIdentityReceipt": "consumer-identity.json"
+  },
+  "hashes": {
+    "composer.json": "75303121edd2ee8e24274a157d8392c2caada0c7bda461ed4f15871658b4ebad",
+    "src/Illuminate/Mail/Mailables/Address.php": "f84e271a24f2489d1374e61553f467f98a32558e8d42e5aeef4a3d8f72b15df3",
+    "src/Illuminate/Mail/Message.php": "7b37953128f05f3b29addad725cc9d3d2eb96856f65c552bd794f9d08e87bb13",
+    "src/Illuminate/Routing/RouteUrlGenerator.php": "eb6e6815b0de2a832ef034f33df7a981d59ae214f4c019c1401feea4dc935af2",
+    "src/Illuminate/Validation/Concerns/ValidatesAttributes.php": "19cfb040b223c76c41df88b6743db2eef8dd90e51dee9a1b48860ed7a9587a43",
+    "tests/Integration/Filesystem/ServeFileTest.php": "1301f84a3251ae029792f51ef4cbb643552aa840aeddeae4710c34c3beb8a214",
+    "tests/Integration/Routing/UrlSigningTest.php": "3cfae4790c41cd32bac6e8661e8b1dc19a5b976145d9787f2f1d88f129d5744f",
+    "tests/Routing/RoutingUrlGeneratorTest.php": "3100442d56fa372b51eb2a3e819ecd131b77f6fc3950c1b3ba543ce2203bd33b",
+    "tests/Security/FrameworkBackportSecurityTest.php": "dde989b13ff8f4158805202c795864286947eebbaeeb180d0459388056560fbc",
+    "tests/Security/RendererSecurityTest.php": "f0c13f6c73a41d8a824ca2e1e43c28b2261adefffc4593518567efd1c4881514",
+    "LICENSE.md": "7b4f9149597fbae2ce689bc9317d1869e17f1b3fa5f01c289998c108f8c37cf7",
+    "src/Illuminate/Auth/TokenGuard.php": "f25e995d1416b7e2ade23e373eb7fb506922dab36cd9916ba69bd986895b3939",
+    "tests/Auth/AuthTokenGuardTest.php": "3bcc91786a232b3ba2de406d14ff762aaef10683d45608f527021c57f3e1b385",
+    "src/Illuminate/Foundation/resources/exceptions/renderer/scripts.js": "a4e31c672bd7168e47ebd5f2ad9807e1dc20f0fc1ff05e58279df41b34aa6e14",
+    "src/Illuminate/Foundation/resources/exceptions/renderer/dist/scripts.js": "a35828a223f6b807ae8b37dc37b0b61f344fc8e8c72d0295d7bbc136e5e483e6",
+    "src/Illuminate/Foundation/resources/exceptions/renderer/components/context.blade.php": "b6b9bcfbe17e60859629c04ca47a4064cdb31e71844edaf382db3bd0bb84b3be",
+    ".github/workflows/security-backports.yml": "365f7bcf6dc45b60d1f78c86d4febe961d86bc06707d6f88ac114c48c0faf2ed",
+    "SECURITY-BACKPORTS.md": "afa1c5785d7a68cb53c9e9b88c57261bca966f47774b41e5823705e3c7c7d6d8",
+    ".gitattributes": "94cfab5629d8e63304dd99c59f15377a37d8ed3ab701b0ea5ef50ba54916e7e5",
+    "src/Illuminate/Foundation/Application.php": "b555ff36ac9dc5f483968cdb6af37d2cbac9e455b16bd873fc0a859684fb2273",
+    "src/Illuminate/Filesystem/LocalFilesystemAdapter.php": "f8bd943cf4346ec3701d8cd869642f2d0910144418de7084c33553e5d620c2e4",
+    "src/Illuminate/Filesystem/ServeFile.php": "8f4503a2860b044454a8a8f7c611378b8d303f668efaa9861bd1d7a7f64f4100",
+    "src/Illuminate/Foundation/Exceptions/Renderer/Renderer.php": "545fb64ddd50aee84c1ec509e05728ff1a15c060d4ad9364a5c0d709cdcc3ae5"
+  },
+  "lockSha256": "b4f0d574a034c30fecd9706450c647b04f165df6a32f9d5a12b214625d0371de",
+  "advisoryRecords": [
+    {
+      "advisoryId": "PKSA-b41t-wbzk-9q51",
+      "packageName": "laravel/framework",
+      "remoteId": "GHSA-f9x3-7vq9-cph6",
+      "title": "Laravel TokenGuard authentication bypass through non-string API credentials",
+      "link": "https://github.com/advisories/GHSA-f9x3-7vq9-cph6",
+      "cve": "CVE-2026-114509",
+      "affectedVersions": "<12.68.0|>=13.0.0,<13.29.0",
+      "source": "GitHub",
+      "reportedAt": "2026-10-23 21:50:27",
+      "composerRepository": "https://packagist.org",
+      "severity": "critical",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-f9x3-7vq9-cph6"
+        }
+      ],
+      "appliesToBase": true,
+      "fingerprintSha256": "b24f9cb7716126fc30cb36996cdbbf950cfa6a8ab296fa14281182b2e2b42c38"
+    },
+    {
+      "advisoryId": "PKSA-4hy6-m98j-dz9f",
+      "packageName": "laravel/framework",
+      "remoteId": "GHSA-5wcm-3v2w-8362",
+      "title": "Laravel relationship inclusion can trigger unauthorized data destruction",
+      "link": "https://github.com/advisories/GHSA-5wcm-3v2w-8362",
+      "cve": "CVE-2026-114508",
+      "affectedVersions": ">=13.0.0,<13.27.0|>=12.45.0,<12.68.0",
+      "source": "GitHub",
+      "reportedAt": "2026-10-23 21:47:48",
+      "composerRepository": "https://packagist.org",
+      "severity": "medium",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-5wcm-3v2w-8362"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "e4fdea88b9da211ee35611db7b51ffcc89a7cf0fb8415f62d20f47784fb39ab6"
+    },
+    {
+      "advisoryId": "PKSA-d5tc-s1qs-h781",
+      "packageName": "laravel/framework",
+      "remoteId": "GHSA-jh5r-qr3c-85q8",
+      "title": "Laravel: XSS in Debug Page Information",
+      "link": "https://github.com/advisories/GHSA-jh5r-qr3c-85q8",
+      "cve": "CVE-2026-102279",
+      "affectedVersions": ">=13.0.0,<13.30.0|<12.69.0",
+      "source": "GitHub",
+      "reportedAt": "2026-09-29 18:24:25",
+      "composerRepository": "https://packagist.org",
+      "severity": "low",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-jh5r-qr3c-85q8"
+        }
+      ],
+      "appliesToBase": true,
+      "fingerprintSha256": "5a282cb4a36cc004d9da6d2c7cbf7c0c9e6cd593f326c2e7ff60c0de627c7ccb"
+    },
+    {
+      "advisoryId": "PKSA-m5cs-t1y6-qpcs",
+      "packageName": "laravel/framework",
+      "remoteId": "GHSA-crmm-hgp2-wgrp",
+      "title": "Laravel Framework: Temporary Signed URL Path Confusion",
+      "link": "https://github.com/advisories/GHSA-crmm-hgp2-wgrp",
+      "cve": null,
+      "affectedVersions": "<12.61.1|>=13.0.0,<13.12.0",
+      "source": "GitHub",
+      "reportedAt": "2026-06-17 13:54:13",
+      "composerRepository": "https://packagist.org",
+      "severity": "medium",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-crmm-hgp2-wgrp"
+        }
+      ],
+      "appliesToBase": true,
+      "fingerprintSha256": "6de6edaa055c42b11ae1a1f48b059ab174551d78c9bc0b2989c91cb212dfad52"
+    },
+    {
+      "advisoryId": "PKSA-3r5d-mb8f-1qw9",
+      "packageName": "laravel/framework",
+      "remoteId": "GHSA-5vg9-5847-vvmq",
+      "title": "Laravel Framework: CRLF injection in default email rule ",
+      "link": "https://github.com/advisories/GHSA-5vg9-5847-vvmq",
+      "cve": null,
+      "affectedVersions": "<12.60.0|>=13.0.0,<=13.9.0",
+      "source": "GitHub",
+      "reportedAt": "2026-06-17 13:53:44",
+      "composerRepository": "https://packagist.org",
+      "severity": "high",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-5vg9-5847-vvmq"
+        }
+      ],
+      "appliesToBase": true,
+      "fingerprintSha256": "d4ff1bb04513eff598013ed5dfd7ef630c0857af95546e8991fb8a15c52ddaed"
+    },
+    {
+      "advisoryId": "PKSA-mdq4-51ck-6kdq",
+      "packageName": "laravel/framework",
+      "remoteId": "laravel/framework/CVE-2026-48019.yaml",
+      "title": "Laravel CRLF injection in default email rule",
+      "link": "https://github.com/laravel/framework/security/advisories/GHSA-5vg9-5847-vvmq",
+      "cve": "CVE-2026-48019",
+      "affectedVersions": ">=9.0.0,<10.0.0|>=10.0.0,<11.0.0|>=11.0.0,<12.0.0|>=12.0.0,<12.60.0|>=13.0.0,<13.10.0",
+      "source": "FriendsOfPHP/security-advisories",
+      "reportedAt": "2026-05-19 18:13:00",
+      "composerRepository": "https://packagist.org",
+      "severity": null,
+      "sources": [
+        {
+          "name": "FriendsOfPHP/security-advisories",
+          "remoteId": "laravel/framework/CVE-2026-48019.yaml"
+        }
+      ],
+      "appliesToBase": true,
+      "fingerprintSha256": "adf2fc0bdc2cca667e7de3a00e0b7a2acb89a12059afbc84adaf688edae1e0f3"
+    },
+    {
+      "advisoryId": "PKSA-8qx3-n5y5-vvnd",
+      "packageName": "laravel/framework",
+      "remoteId": "GHSA-78fx-h6xr-vch4",
+      "title": "Laravel has a File Validation Bypass",
+      "link": "https://github.com/advisories/GHSA-78fx-h6xr-vch4",
+      "cve": "CVE-2025-27515",
+      "affectedVersions": "<10.48.29|>=11.0.0,<11.44.1|>=12.0.0,<12.1.1",
+      "source": "GitHub",
+      "reportedAt": "2025-03-05 19:09:39",
+      "composerRepository": "https://packagist.org",
+      "severity": "medium",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-78fx-h6xr-vch4"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "9c518623fb61477cc711b95aec099f9658c6f203f2a23befb376e2e270e24895"
+    },
+    {
+      "advisoryId": "PKSA-q46n-4fdk-zjr4",
+      "packageName": "laravel/framework",
+      "remoteId": "laravel/framework/CVE-2024-13919.yaml",
+      "title": "Laravel Reflected XSS via Route Parameter in Debug-Mode Error Page",
+      "link": "https://github.com/sbaresearch/advisories/tree/public/2024/SBA-ADV-20241209-02_Laravel_Reflected_XSS_via_Route_Parameter_in_Debug-Mode_Error_Page",
+      "cve": "CVE-2024-13919",
+      "affectedVersions": ">=11.9.0,<11.36.0",
+      "source": "FriendsOfPHP/security-advisories",
+      "reportedAt": "2024-12-13 15:51:00",
+      "composerRepository": "https://packagist.org",
+      "severity": "medium",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-83wp-f5c3-hqqr"
+        },
+        {
+          "name": "FriendsOfPHP/security-advisories",
+          "remoteId": "laravel/framework/CVE-2024-13919.yaml"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "3ca277dea8c64f7de883608b76c5a9126f4680fec1a1beb6336fc619fc6c7ef9"
+    },
+    {
+      "advisoryId": "PKSA-qzrn-rnz3-85w1",
+      "packageName": "laravel/framework",
+      "remoteId": "laravel/framework/CVE-2024-13918.yaml",
+      "title": "Laravel Reflected XSS via Request Parameter in Debug-Mode Error Page",
+      "link": "https://github.com/sbaresearch/advisories/tree/public/2024/SBA-ADV-20241209-01_Laravel_Reflected_XSS_via_Request_Parameter_in_Debug-Mode_Error_Page",
+      "cve": "CVE-2024-13918",
+      "affectedVersions": ">=11.9.0,<11.36.0",
+      "source": "FriendsOfPHP/security-advisories",
+      "reportedAt": "2024-12-13 15:51:00",
+      "composerRepository": "https://packagist.org",
+      "severity": "medium",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-546h-56qp-8jmw"
+        },
+        {
+          "name": "FriendsOfPHP/security-advisories",
+          "remoteId": "laravel/framework/CVE-2024-13918.yaml"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "464e05fe9c963a98c712214f22c6ded8be71658a4144e9481b3111d0072a813a"
+    },
+    {
+      "advisoryId": "PKSA-w7xr-vk7n-rstm",
+      "packageName": "laravel/framework",
+      "remoteId": "laravel/framework/CVE-2024-52301.yaml",
+      "title": "Laravel environment manipulation via query string",
+      "link": "https://github.com/advisories/GHSA-gv7v-rgg6-548h",
+      "cve": "CVE-2024-52301",
+      "affectedVersions": "<6.20.45|>=7.0.0,<7.30.7|>=8.0.0,<8.83.28|>=9.0.0,<9.52.17|>=10.0.0,<10.48.23|>=11.0.0,<11.31.0",
+      "source": "FriendsOfPHP/security-advisories",
+      "reportedAt": "2024-11-12 15:29:00",
+      "composerRepository": "https://packagist.org",
+      "severity": "high",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-gv7v-rgg6-548h"
+        },
+        {
+          "name": "FriendsOfPHP/security-advisories",
+          "remoteId": "laravel/framework/CVE-2024-52301.yaml"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "dbea43392917258b02f02f311d0c34c374470b6329956f8df054139cc83c7ea6"
+    },
+    {
+      "advisoryId": "PKSA-6wgv-k7p1-h4fg",
+      "packageName": "laravel/framework",
+      "remoteId": "GHSA-p62r-7637-3wwc",
+      "title": "Laravel Hijacked authentication cookies vulnerability",
+      "link": "https://github.com/advisories/GHSA-p62r-7637-3wwc",
+      "cve": null,
+      "affectedVersions": ">=4.0.0,<4.1.26",
+      "source": "GitHub",
+      "reportedAt": "2024-05-15 22:06:42",
+      "composerRepository": "https://packagist.org",
+      "severity": "medium",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-p62r-7637-3wwc"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "3c2277142896bfbff615fc28d3ff4661ab3425b1e67007971d84741eac8cc643"
+    },
+    {
+      "advisoryId": "PKSA-11c9-dxsr-yqjb",
+      "packageName": "laravel/framework",
+      "remoteId": "GHSA-rj3w-99gc-8j58",
+      "title": "Laravel Risk of mass-assignment vulnerabilities",
+      "link": "https://github.com/advisories/GHSA-rj3w-99gc-8j58",
+      "cve": null,
+      "affectedVersions": ">=4.0.0,<4.1.29",
+      "source": "GitHub",
+      "reportedAt": "2024-05-15 22:05:00",
+      "composerRepository": "https://packagist.org",
+      "severity": "medium",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-rj3w-99gc-8j58"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "fca23120e4709125246356ad0904620542dcb5b0f6b8effbc1f77447b0149e84"
+    },
+    {
+      "advisoryId": "PKSA-dpt9-7cmv-dk65",
+      "packageName": "laravel/framework",
+      "remoteId": "GHSA-pfg4-p438-p874",
+      "title": "Laravel Framework Deserialization Vulnerability",
+      "link": "https://github.com/advisories/GHSA-pfg4-p438-p874",
+      "cve": "CVE-2019-9081",
+      "affectedVersions": ">=5.7.0,<6.20.44",
+      "source": "GitHub",
+      "reportedAt": "2022-05-14 01:31:22",
+      "composerRepository": "https://packagist.org",
+      "severity": "critical",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-pfg4-p438-p874"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "bdda830089e46548bc86140049c252bb755cba56de0237953eba324838c45764"
+    },
+    {
+      "advisoryId": "PKSA-3qhw-gzjt-j63j",
+      "packageName": "laravel/framework",
+      "remoteId": "GHSA-qvqm-h22r-4cp9",
+      "title": "Laravel Framework RCE Vulnerability",
+      "link": "https://github.com/advisories/GHSA-qvqm-h22r-4cp9",
+      "cve": "CVE-2018-15133",
+      "affectedVersions": ">=5.6.0,<=5.6.29|<=5.5.40",
+      "source": "GitHub",
+      "reportedAt": "2022-05-14 00:56:30",
+      "composerRepository": "https://packagist.org",
+      "severity": "high",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-qvqm-h22r-4cp9"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "d39869f791b20c26b36e6426858191421c8b17012f814b2e53dcd27ae8c1bfd6"
+    },
+    {
+      "advisoryId": "PKSA-17kp-jm2n-vxzz",
+      "packageName": "laravel/framework",
+      "remoteId": "GHSA-w2pm-r78h-4m7v",
+      "title": "OS Command Injection in Laravel Framework",
+      "link": "https://github.com/advisories/GHSA-w2pm-r78h-4m7v",
+      "cve": "CVE-2020-19316",
+      "affectedVersions": "<5.8.17",
+      "source": "GitHub",
+      "reportedAt": "2022-01-06 23:13:42",
+      "composerRepository": "https://packagist.org",
+      "severity": "high",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-w2pm-r78h-4m7v"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "a8c9873f4b9f211654efd194907480fba59b63c7ad0b367b8e29350dcb2c8dfc"
+    },
+    {
+      "advisoryId": "PKSA-p3rx-dfwp-73ny",
+      "packageName": "laravel/framework",
+      "remoteId": "laravel/framework/CVE-2021-43617.yaml",
+      "title": "Image upload bypass",
+      "link": "https://github.com/laravel/framework/pull/39666",
+      "cve": "CVE-2021-43617",
+      "affectedVersions": ">=8.0.0,<8.71.0",
+      "source": "FriendsOfPHP/security-advisories",
+      "reportedAt": "2021-11-18 02:10:57",
+      "composerRepository": "https://packagist.org",
+      "severity": null,
+      "sources": [
+        {
+          "name": "FriendsOfPHP/security-advisories",
+          "remoteId": "laravel/framework/CVE-2021-43617.yaml"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "0f57572bededc3e6dff47de1e199f9ad889404e9dc3e4b3aa95d54d08c93f5c3"
+    },
+    {
+      "advisoryId": "PKSA-7ywf-hktb-jkn9",
+      "packageName": "laravel/framework",
+      "remoteId": "GHSA-w68r-5p45-5rqp",
+      "title": "Improper Input Validation in Laravel",
+      "link": "https://github.com/advisories/GHSA-w68r-5p45-5rqp",
+      "cve": "CVE-2020-24941",
+      "affectedVersions": ">=7.0.0,<7.24.0|<6.18.35",
+      "source": "GitHub",
+      "reportedAt": "2021-05-06 18:54:20",
+      "composerRepository": "https://packagist.org",
+      "severity": "high",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-w68r-5p45-5rqp"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "9fee8e4251b5db32d793f5883152f2142014d45e838998b04a8eb95c33247d85"
+    },
+    {
+      "advisoryId": "PKSA-ckwp-rt7t-c46m",
+      "packageName": "laravel/framework",
+      "remoteId": "laravel/framework/2021-04-28.yaml",
+      "title": "SQL Server LIMIT / OFFSET SQL Injection",
+      "link": "https://github.com/laravel/framework/security/advisories/GHSA-4mg9-vhxq-vm7j",
+      "cve": null,
+      "affectedVersions": ">=6.0.0,<6.20.26|>=7.0.0,<7.30.5|>=8.0.0,<8.40.0",
+      "source": "FriendsOfPHP/security-advisories",
+      "reportedAt": "2021-04-28 00:00:00",
+      "composerRepository": "https://packagist.org",
+      "severity": "medium",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-7852-w36x-6mf6"
+        },
+        {
+          "name": "FriendsOfPHP/security-advisories",
+          "remoteId": "laravel/framework/2021-04-28.yaml"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "244bc2481ce03df224a3313a8746e8a25b0459ac33ab12e5f1757f26957e1d1d"
+    },
+    {
+      "advisoryId": "PKSA-4npr-btr6-zhny",
+      "packageName": "laravel/framework",
+      "remoteId": "laravel/framework/2021-01-21.yaml",
+      "title": "Unexpected bindings in QueryBuilder",
+      "link": "https://github.com/laravel/framework/security/advisories/GHSA-x7p5-p2c9-phvg",
+      "cve": null,
+      "affectedVersions": ">=6.0.0,<6.20.14|>=7.0.0,<7.30.4|>=8.0.0,<8.24.0",
+      "source": "FriendsOfPHP/security-advisories",
+      "reportedAt": "2021-01-21 00:00:00",
+      "composerRepository": "https://packagist.org",
+      "severity": "high",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-6jvx-8ch9-j2jr"
+        },
+        {
+          "name": "FriendsOfPHP/security-advisories",
+          "remoteId": "laravel/framework/2021-01-21.yaml"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "0de1502216fd6ddfbded3c7db422982cd82f77742bb68a0dda92c5c0bcad4999"
+    },
+    {
+      "advisoryId": "PKSA-njrm-6dtg-m2pc",
+      "packageName": "laravel/framework",
+      "remoteId": "laravel/framework/CVE-2021-43808.yaml",
+      "title": "Possible cross-site scripting (XSS) vulnerability in the Blade templating engine",
+      "link": "https://github.com/laravel/framework/security/advisories/GHSA-66hf-2p6w-jqfw",
+      "cve": "CVE-2021-43808",
+      "affectedVersions": "<6.20.42|>=7.0.0,<7.30.6|>=8.0.0,<8.75.0",
+      "source": "FriendsOfPHP/security-advisories",
+      "reportedAt": "2021-01-01 00:00:00",
+      "composerRepository": "https://packagist.org",
+      "severity": "medium",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-66hf-2p6w-jqfw"
+        },
+        {
+          "name": "FriendsOfPHP/security-advisories",
+          "remoteId": "laravel/framework/CVE-2021-43808.yaml"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "9e19a2d68ce152c977a727fded9f5ac17cde945a34ae9dcc0fefdba9bef4c2f2"
+    },
+    {
+      "advisoryId": "PKSA-vhvj-tvg4-96jj",
+      "packageName": "laravel/framework",
+      "remoteId": "laravel/framework/2020-08-06-1.yaml",
+      "title": "Guard bypass in Eloquent models",
+      "link": "https://blog.laravel.com/security-release-laravel-61834-7232",
+      "cve": null,
+      "affectedVersions": ">=5.5.0,<=5.5.49|>=6.0.0,<6.18.34|>=7.0.0,<7.23.2",
+      "source": "FriendsOfPHP/security-advisories",
+      "reportedAt": "2020-08-06 00:00:00",
+      "composerRepository": "https://packagist.org",
+      "severity": "critical",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-qm5c-m76r-2hfr"
+        },
+        {
+          "name": "FriendsOfPHP/security-advisories",
+          "remoteId": "laravel/framework/2020-08-06-1.yaml"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "61e754d810ee9e3687c475745184ce6d857eaee8c088c77f758013a4f69ddf1b"
+    },
+    {
+      "advisoryId": "PKSA-nrj3-r2wg-yt8b",
+      "packageName": "laravel/framework",
+      "remoteId": "laravel/framework/2020-07-27-1.yaml",
+      "title": "RCE vulnerability in \"cookie\" session driver",
+      "link": "https://blog.laravel.com/laravel-cookie-security-releases",
+      "cve": null,
+      "affectedVersions": ">=4.1.0,<=4.1.99999|>=4.2.0,<=4.2.99999|>=5.0.0,<=5.0.99999|>=5.1.0,<=5.1.99999|>=5.2.0,<=5.2.99999|>=5.3.0,<=5.3.99999|>=5.4.0,<=5.4.99999|>=5.5.0,<=5.5.49|>=5.6.0,<=5.6.99999|>=5.7.0,<=5.7.99999|>=5.8.0,<=5.8.99999|>=6.0.0,<6.18.31|>=7.0.0,<7.22.4",
+      "source": "FriendsOfPHP/security-advisories",
+      "reportedAt": "2020-07-27 00:00:00",
+      "composerRepository": "https://packagist.org",
+      "severity": "medium",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-vr95-p7q6-8m9q"
+        },
+        {
+          "name": "FriendsOfPHP/security-advisories",
+          "remoteId": "laravel/framework/2020-07-27-1.yaml"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "15e9c3b645d84dc21127f68d43e82aff9cf379f818b65781aa197c6d19cc1c50"
+    },
+    {
+      "advisoryId": "PKSA-rvky-x3cg-y3qd",
+      "packageName": "laravel/framework",
+      "remoteId": "laravel/framework/2020-03-13-1.yaml",
+      "title": "XSS vulnerability in blade templating",
+      "link": "https://github.com/laravel/framework/pull/31945",
+      "cve": null,
+      "affectedVersions": ">=7.0.0,<7.1.2",
+      "source": "FriendsOfPHP/security-advisories",
+      "reportedAt": "2020-03-13 00:00:00",
+      "composerRepository": "https://packagist.org",
+      "severity": "medium",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-44pg-c29v-hp6r"
+        },
+        {
+          "name": "FriendsOfPHP/security-advisories",
+          "remoteId": "laravel/framework/2020-03-13-1.yaml"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "42870ba18ae668db122abec8953063cb42148b00a03287a9dbccb0d192d67560"
+    },
+    {
+      "advisoryId": "PKSA-985r-hryy-555b",
+      "packageName": "laravel/framework",
+      "remoteId": "laravel/framework/CVE-2021-21263.yaml",
+      "title": "Unexpected bindings in QueryBuilder",
+      "link": "https://blog.laravel.com/security-laravel-62011-7302-8221-released",
+      "cve": "CVE-2021-21263",
+      "affectedVersions": ">=6.0.0,<6.20.11|>=7.0.0,<7.30.2|>=8.0.0,<8.22.1",
+      "source": "FriendsOfPHP/security-advisories",
+      "reportedAt": "2020-01-13 14:35:00",
+      "composerRepository": "https://packagist.org",
+      "severity": "high",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-3p32-j457-pg5x"
+        },
+        {
+          "name": "FriendsOfPHP/security-advisories",
+          "remoteId": "laravel/framework/CVE-2021-21263.yaml"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "eeded422a92c904cc6a99116725242a307db63ca9bb7c33513c58514c281f723"
+    },
+    {
+      "advisoryId": "PKSA-mhj3-vthf-h41n",
+      "packageName": "laravel/framework",
+      "remoteId": "laravel/framework/2018-08-08-1.yaml",
+      "title": "Cookie serialization vulnerability",
+      "link": "https://laravel.com/docs/5.6/upgrade#upgrade-5.6.30",
+      "cve": null,
+      "affectedVersions": ">=4.0.0,<=4.0.11|>=4.1.0,<=4.1.31|>=4.2.0,<=4.2.22|>=5.0.0,<=5.0.35|>=5.1.0,<=5.1.46|>=5.2.0,<=5.2.45|>=5.3.0,<=5.3.31|>=5.4.0,<=5.4.36|>=5.5.0,<5.5.42|>=5.6.0,<5.6.30",
+      "source": "FriendsOfPHP/security-advisories",
+      "reportedAt": "2018-08-08 00:00:00",
+      "composerRepository": "https://packagist.org",
+      "severity": "high",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-jwvj-pwww-3mj5"
+        },
+        {
+          "name": "FriendsOfPHP/security-advisories",
+          "remoteId": "laravel/framework/2018-08-08-1.yaml"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "a7bc0a97d2855726796f0b4f5f6b318b698f6d4057ad4367f9058864ef8b0e66"
+    },
+    {
+      "advisoryId": "PKSA-cn77-7mny-v9zg",
+      "packageName": "laravel/framework",
+      "remoteId": "laravel/framework/2018-03-30-1.yaml",
+      "title": "Exploit of encryption failure vulnerability",
+      "link": "https://medium.com/@taylorotwell/laravel-security-release-5-6-15-and-5-5-40-56f1257933a0",
+      "cve": null,
+      "affectedVersions": ">=4.0.0,<=4.0.11|>=4.1.0,<=4.1.31|>=4.2.0,<=4.2.22|>=5.0.0,<=5.0.35|>=5.1.0,<=5.1.46|>=5.2.0,<=5.2.45|>=5.3.0,<=5.3.31|>=5.4.0,<=5.4.36|>=5.5.0,<5.5.40|>=5.6.0,<5.6.15",
+      "source": "FriendsOfPHP/security-advisories",
+      "reportedAt": "2018-03-30 00:00:00",
+      "composerRepository": "https://packagist.org",
+      "severity": "high",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-4mg9-vhxq-vm7j"
+        },
+        {
+          "name": "FriendsOfPHP/security-advisories",
+          "remoteId": "laravel/framework/2018-03-30-1.yaml"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "6b470c31ff44a5eb91461fddd872300e8d05533612902668b7f2f263401fa8a3"
+    },
+    {
+      "advisoryId": "PKSA-xf4x-p5c1-z9xq",
+      "packageName": "laravel/framework",
+      "remoteId": "laravel/framework/CVE-2017-14775.yaml",
+      "title": "Timing attack vector for remember me token",
+      "link": "https://github.com/laravel/framework/pull/21320",
+      "cve": "CVE-2017-14775",
+      "affectedVersions": ">=4.1.26,<=4.1.31|>=4.2.0,<=4.2.22|>=5.0.0,<=5.0.35|>=5.1.0,<=5.1.46|>=5.2.0,<=5.2.45|>=5.3.0,<=5.3.31|>=5.4.0,<=5.4.36|>=5.5.0,<5.5.10",
+      "source": "FriendsOfPHP/security-advisories",
+      "reportedAt": "2017-09-21 01:38:58",
+      "composerRepository": "https://packagist.org",
+      "severity": "medium",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-c2v7-j5gq-wcq4"
+        },
+        {
+          "name": "FriendsOfPHP/security-advisories",
+          "remoteId": "laravel/framework/CVE-2017-14775.yaml"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "ce47988bb44006cc0da24c1e9a0f1f2cad5cc60f88c77243f70d10c5f25c539f"
+    },
+    {
+      "advisoryId": "PKSA-fwj1-r2kg-bmxd",
+      "packageName": "laravel/framework",
+      "remoteId": "laravel/framework/CVE-2017-9303.yaml",
+      "title": "Password reset phishing vulnerability",
+      "link": "https://laravel.com/docs/5.4/releases#laravel-5.4.22",
+      "cve": "CVE-2017-9303",
+      "affectedVersions": ">=5.3.0,<=5.3.31|>=5.4.0,<5.4.22",
+      "source": "FriendsOfPHP/security-advisories",
+      "reportedAt": "2017-05-07 17:49:26",
+      "composerRepository": "https://packagist.org",
+      "severity": "medium",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-rc8x-jrrc-frfv"
+        },
+        {
+          "name": "FriendsOfPHP/security-advisories",
+          "remoteId": "laravel/framework/CVE-2017-9303.yaml"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "316fe8d549679ed316cf212670afd096432c4c7c73668fc65b6b373c3748a3c6"
+    },
+    {
+      "advisoryId": "PKSA-4d28-pz9s-51zj",
+      "packageName": "laravel/framework",
+      "remoteId": "laravel/framework/2014-05-20.yaml",
+      "title": "Risk of mass-assignment vulnerabilities",
+      "link": "https://laravel.com/docs/5.3/upgrade#upgrade-4.1.29",
+      "cve": null,
+      "affectedVersions": ">=4.0.0,<4.0.99|>=4.1.0,<4.1.29",
+      "source": "FriendsOfPHP/security-advisories",
+      "reportedAt": "2014-05-20 00:00:00",
+      "composerRepository": "https://packagist.org",
+      "severity": "high",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-x7p5-p2c9-phvg"
+        },
+        {
+          "name": "FriendsOfPHP/security-advisories",
+          "remoteId": "laravel/framework/2014-05-20.yaml"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "5d9ad43fc18739a281ae4823dcdc8fb036bbba143bf2622c32e6cded98aedf6b"
+    },
+    {
+      "advisoryId": "PKSA-gf52-cc16-7thv",
+      "packageName": "laravel/framework",
+      "remoteId": "laravel/framework/2014-04-15.yaml",
+      "title": "Hijacked authentication cookies vulnerability",
+      "link": "https://laravel.com/docs/5.3/upgrade#upgrade-4.1.26",
+      "cve": null,
+      "affectedVersions": ">=4.0.0,<4.0.99|>=4.1.0,<4.1.26",
+      "source": "FriendsOfPHP/security-advisories",
+      "reportedAt": "2014-04-15 00:00:00",
+      "composerRepository": "https://packagist.org",
+      "severity": "high",
+      "sources": [
+        {
+          "name": "GitHub",
+          "remoteId": "GHSA-wq8p-mqvg-2p5h"
+        },
+        {
+          "name": "FriendsOfPHP/security-advisories",
+          "remoteId": "laravel/framework/2014-04-15.yaml"
+        }
+      ],
+      "appliesToBase": false,
+      "fingerprintSha256": "12fe41dbc1683588b5c8b3a4d227d0b1d13a73c02aed2bfd83a97296bbf390bf"
+    }
+  ],
+  "inventorySha256": "2d2d1d13a3add59acd70ae91628fb4ab03c8630fda7ce461b315e871413af608",
+  "consumerLockSha256": "112b462363ea04538ab53373fde8fc7ed54ceec55fff7e35eb39171558241ff9",
+  "upstreamHashes": {
+    "composer.json": "8248e902a5a8fc3f32eb312bdbd1a93f9465c3ab5cfbe7e251be237fc5130d03",
+    "src/Illuminate/Mail/Mailables/Address.php": "3a7c897a77be4f45eb37dafd910d19db583c3c7c95c1888a6e2b3bc3c9cccb38",
+    "src/Illuminate/Mail/Message.php": "d318b03322fe623fc68e19d46ef248b8c27ab4e02358415a4366ce920e011bbd",
+    "src/Illuminate/Routing/RouteUrlGenerator.php": "780de9954691cbcce477ecfedd275432e31f7568e66e2fb00c5be002fe7dfd79",
+    "src/Illuminate/Validation/Concerns/ValidatesAttributes.php": "95bb7d5bba2f6aefc858c612f1cd161452f2af4adedd9898f387ca598912f501",
+    "tests/Integration/Filesystem/ServeFileTest.php": "a56c95c7a6a849dc0deea42b8cb0da386f8219337333462bd9ead5df910e0c08",
+    "tests/Integration/Routing/UrlSigningTest.php": "f453ea62bc4204849151978964460f3e6ce653252b945d559539001355fd0e43",
+    "tests/Routing/RoutingUrlGeneratorTest.php": "efaef51c0c53461f16dc7b888ca87677ad0971047c8408aff2df3365f59ee617",
+    "LICENSE.md": "7b4f9149597fbae2ce689bc9317d1869e17f1b3fa5f01c289998c108f8c37cf7",
+    "src/Illuminate/Auth/TokenGuard.php": "f25e995d1416b7e2ade23e373eb7fb506922dab36cd9916ba69bd986895b3939",
+    "tests/Auth/AuthTokenGuardTest.php": "3bcc91786a232b3ba2de406d14ff762aaef10683d45608f527021c57f3e1b385",
+    "src/Illuminate/Foundation/resources/exceptions/renderer/scripts.js": "a4e31c672bd7168e47ebd5f2ad9807e1dc20f0fc1ff05e58279df41b34aa6e14",
+    "src/Illuminate/Foundation/resources/exceptions/renderer/dist/scripts.js": "a35828a223f6b807ae8b37dc37b0b61f344fc8e8c72d0295d7bbc136e5e483e6",
+    "src/Illuminate/Foundation/resources/exceptions/renderer/components/context.blade.php": "b6b9bcfbe17e60859629c04ca47a4064cdb31e71844edaf382db3bd0bb84b3be",
+    ".gitattributes": "94cfab5629d8e63304dd99c59f15377a37d8ed3ab701b0ea5ef50ba54916e7e5",
+    "src/Illuminate/Foundation/Application.php": "b555ff36ac9dc5f483968cdb6af37d2cbac9e455b16bd873fc0a859684fb2273",
+    "src/Illuminate/Filesystem/LocalFilesystemAdapter.php": "f8bd943cf4346ec3701d8cd869642f2d0910144418de7084c33553e5d620c2e4",
+    "src/Illuminate/Filesystem/ServeFile.php": "8f4503a2860b044454a8a8f7c611378b8d303f668efaa9861bd1d7a7f64f4100",
+    "src/Illuminate/Foundation/Exceptions/Renderer/Renderer.php": "545fb64ddd50aee84c1ec509e05728ff1a15c060d4ad9364a5c0d709cdcc3ae5"
+  }
+}
