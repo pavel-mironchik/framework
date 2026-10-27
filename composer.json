@@ -1,6 +1,6 @@
 {
-    "name": "laravel/framework",
-    "description": "The Laravel Framework.",
+    "name": "flashasia/framework",
+    "description": "FlashAsia maintained Laravel 11 framework security backports",
     "keywords": [
         "framework",
         "laravel"
@@ -98,7 +98,8 @@
         "illuminate/translation": "self.version",
         "illuminate/validation": "self.version",
         "illuminate/view": "self.version",
-        "spatie/once": "*"
+        "spatie/once": "*",
+        "laravel/framework": "self.version"
     },
     "require-dev": {
         "ext-gmp": "*",
@@ -160,11 +161,6 @@
         ],
         "psr-4": {
             "Illuminate\\Tests\\": "tests/"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "11.x-dev"
         }
     },
     "suggest": {
