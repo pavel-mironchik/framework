@@ -24,9 +24,11 @@ Application::VERSION remains the upstream base version, not Laravel 12.
 - Debug XSS GHSA-jh5r-qr3c-85q8: comparison with official
   `b495ca2ec4e15a977e8700328bf13e8a79f29d12` establishes 11's older renderer does
   not enable HTML tooltips. Actual Testbench-rendered HTML with an injected
-  untrusted header-name tooltip is produced for browser testing. This fixture
-  does not claim malformed headers pass a real HTTP server. Published/custom
-  application views require separate assessment.
+  untrusted header-name tooltip was verified in user-authorized Chrome through
+  a genuine loopback Testbench HTTP application. Clicking the tooltip displayed
+  literal payload text, with zero tooltip/payload image nodes and no script
+  execution. This synthetic HeaderBag fixture does not prove malformed headers
+  pass a real HTTP server; published/custom views require separate assessment.
 
 All fresh Packagist advisory records are classified against upstream identity,
 not hidden through renaming. The newer unauthorized-destruction advisory starts
@@ -43,9 +45,20 @@ no version overrides, aliases or security exceptions are used. Source hashes
 and advisory fingerprints are retained in security-backports.json; execution
 receipts are stored outside this tree in the adjacent evidence directory.
 
-The bounded security workflow has PHP 8.3/8.4 cells only. Existing upstream
-workflows remain inherited and must be reviewed before public hosting enables
-Actions; this new workflow does not claim full-suite or browser coverage.
+The publication policy enables only the dedicated `security-backports.yml`
+workflow, with PHP 8.3/8.4 cells. Inherited upstream workflows remain source
+references; their API workflow states must be disabled in the own fork before
+public push or enabling Actions. The publisher manually dispatches the exact
+11.x candidate and verifies only these named cells. Inherited version overrides,
+broad matrices, release automation and issue bots must not execute. A full
+framework suite is not claimed.
+
 The original-identity advisory inventory is retained in security-backports.json;
 root-package Composer audit alone cannot replace the consuming security gate.
-Browser execution remains PENDING; rendered HTML is not DOM-execution proof.
+Browser proof passed for the actual default Laravel renderer and compiled assets
+from candidate 838515553f8cd4fcd1253f759bebded588277cc6 on PHP 8.3.28.
+The observed synthetic tooltip was literal text, with zero image nodes and no
+payload execution. The first Symfony fallback response is excluded from proof.
+This does not cover custom views, malformed HTTP header acceptance, application
+framework cutover or production data. Stable VCS consumer proof remains a
+publisher gate; current consumer evidence is the genuine 11.x-dev path install.

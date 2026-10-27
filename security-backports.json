@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "status": "unreleased own-identity 11.x-dev candidate; independent review and browser proof pending",
+  "status": "unreleased own-identity 11.x-dev candidate; browser proof passed for default renderer; independent review and publication pending",
   "upstream": {
     "package": "laravel/framework",
     "version": "v11.57.0",
@@ -40,9 +40,9 @@
       "effectiveRuntimeFix": "RouteUrlGenerator::encodeParameter; LocalFilesystemAdapter remains byte-identical to base"
     },
     "GHSA-jh5r-qr3c-85q8": {
-      "disposition": "base has no allowHTML true configuration; actual renderer HTML generated, browser verification pending",
+      "disposition": "base default renderer does not enable HTML tooltips; genuine HTTP Chrome click proof passed with literal text, zero images and no payload execution",
       "comparisonSource": "b495ca2ec4e15a977e8700328bf13e8a79f29d12",
-      "fixture": "renderer.html",
+      "fixture": "genuine loopback Testbench HTTP application; isolated renderer-server/router.php",
       "payload": "<img src=x onerror=\"window.frameworkxss=1\">",
       "fixtureLimit": "synthetic Request header name injected through Testbench; does not prove malformed HTTP header can pass real server",
       "trigger": "click"
@@ -64,7 +64,7 @@
     "ownIdentitySourcePhp84": "security 29/196; signing 26/67; route generation 17/70 with 1 existing skip",
     "consumerPhp83": "security 29/196; signing 26/67; installed mirrored own framework",
     "consumerPhp84": "security 29/196; signing 26/67; installed mirrored own framework",
-    "browser": "PENDING, no browser execution; synthetic HTML only",
+    "browser": "PASS: user-authorized Chrome, actual default Laravel renderer/compiled assets; synthetic HeaderBag payload only",
     "sourceIdentityReceipt": "own-root-identity.json",
     "consumerIdentityReceipt": "consumer-identity.json"
   },
@@ -86,7 +86,7 @@
     "src/Illuminate/Foundation/resources/exceptions/renderer/dist/scripts.js": "a35828a223f6b807ae8b37dc37b0b61f344fc8e8c72d0295d7bbc136e5e483e6",
     "src/Illuminate/Foundation/resources/exceptions/renderer/components/context.blade.php": "b6b9bcfbe17e60859629c04ca47a4064cdb31e71844edaf382db3bd0bb84b3be",
     ".github/workflows/security-backports.yml": "365f7bcf6dc45b60d1f78c86d4febe961d86bc06707d6f88ac114c48c0faf2ed",
-    "SECURITY-BACKPORTS.md": "afa1c5785d7a68cb53c9e9b88c57261bca966f47774b41e5823705e3c7c7d6d8",
+    "SECURITY-BACKPORTS.md": "7de39a03914b88ae083303a55a026ceac393cbffbbd625a3cb98eb94408015a7",
     ".gitattributes": "94cfab5629d8e63304dd99c59f15377a37d8ed3ab701b0ea5ef50ba54916e7e5",
     "src/Illuminate/Foundation/Application.php": "b555ff36ac9dc5f483968cdb6af37d2cbac9e455b16bd873fc0a859684fb2273",
     "src/Illuminate/Filesystem/LocalFilesystemAdapter.php": "f8bd943cf4346ec3701d8cd869642f2d0910144418de7084c33553e5d620c2e4",
@@ -812,5 +812,44 @@
     "src/Illuminate/Filesystem/LocalFilesystemAdapter.php": "f8bd943cf4346ec3701d8cd869642f2d0910144418de7084c33553e5d620c2e4",
     "src/Illuminate/Filesystem/ServeFile.php": "8f4503a2860b044454a8a8f7c611378b8d303f668efaa9861bd1d7a7f64f4100",
     "src/Illuminate/Foundation/Exceptions/Renderer/Renderer.php": "545fb64ddd50aee84c1ec509e05728ff1a15c060d4ad9364a5c0d709cdcc3ae5"
+  },
+  "browserProof": {
+    "status": "PASS",
+    "verified": true,
+    "sourceCandidate": "838515553f8cd4fcd1253f759bebded588277cc6",
+    "runtime": "PHP8.3.28 Laravel11.57.0 real Testbench HTTP app",
+    "browser": "user-authorized Chrome",
+    "interaction": "click actual displayed synthetic header-name tooltip",
+    "observed": {
+      "tooltipText": "<img src=x onerror=\"window.frameworkxss=1\">",
+      "tooltipImages": 0,
+      "payloadImages": 0,
+      "executed": false
+    },
+    "scopeLimits": [
+      "synthetic HeaderBag injection; not proof malformed header can pass real HTTP",
+      "default actual11renderer/compiledassets only; no custompublished view claim",
+      "not root app/framework cutover; no production data accessed"
+    ],
+    "fixtureRouterSha256": "85c364cd77cc8e2a727aad112b3bbefcd55e39849869681b6c7c1ca5e126964a",
+    "compiledAssetSha256": "a35828a223f6b807ae8b37dc37b0b61f344fc8e8c72d0295d7bbc136e5e483e6",
+    "httpResponseSha256": "0253171be02982b7586334b37f000ce1483f42d80f17363062ef104dc8e39b43",
+    "rendererBound": true,
+    "actualCompiledAssetInResponse": true,
+    "receiptPath": "storage/agent-validation/20261027-framework-doctrine/browser/receipt.json",
+    "receiptSha256": "8747ac2d020de06379f78da55b50a5fe25e4ca30d976e0508de21eecd4a4ab0c",
+    "screenshotSha256": "479e9b4f8e60349078e91e6ed07fad66c4adf42d8af3410bc8e6dd51aa7f13c7",
+    "excluded": "first Symfony fallback response; failed file and browser-client paths are not browser proof"
+  },
+  "publicationPolicy": {
+    "onlyActiveWorkflow": ".github/workflows/security-backports.yml",
+    "inheritedWorkflows": "retain upstream reference files; publisher disables all inherited API workflow states before public push or enabling Actions",
+    "dispatch": "manual exact 11.x candidate",
+    "cells": [
+      "PHP 8.3",
+      "PHP 8.4"
+    ],
+    "fullSuiteClaim": false,
+    "stableVcsConsumerProof": "pending publisher gate; current own consumer proof uses actual 11.x-dev path package"
   }
 }
