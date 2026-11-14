@@ -36,7 +36,9 @@ jobs:
       - name: Audit dependency graph
         run: composer audit --locked
       - name: Token, mail, filesystem and renderer regressions
-        run: php vendor/bin/phpunit --bootstrap vendor/autoload.php --log-junit security.xml tests/Auth/AuthTokenGuardTest.php tests/Integration/Filesystem/ServeFileTest.php tests/Security
+        run: php vendor/bin/phpunit --bootstrap vendor/autoload.php --log-junit security.xml tests/Auth/AuthTokenGuardTest.php tests/Integration/Filesystem/ServeFileTest.php tests/Security/FrameworkBackportSecurityTest.php tests/Security/RendererSecurityTest.php
+      - name: Authenticated concurrency results and real child processes
+        run: php vendor/bin/phpunit --bootstrap tests/Security/fixtures/concurrency-bootstrap.php --log-junit concurrency.xml tests/Security/ConcurrencyEnvelopeSecurityTest.php
       - name: Signed route integration
         run: php vendor/bin/phpunit --bootstrap vendor/autoload.php --log-junit signing.xml tests/Integration/Routing/UrlSigningTest.php
       - name: Bounded route generation compatibility
@@ -47,5 +49,6 @@ jobs:
           name: security-php-${{ matrix.php }}
           path: |
             security.xml
+            concurrency.xml
             signing.xml
             routing.xml

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "status": "unreleased own-identity 11.x-dev candidate; browser proof passed for default renderer; independent review and publication pending",
+  "status": "unreleased maintained Laravel 11 patch 11.57.2; local concurrency proof passed; independent review and publication pending",
   "upstream": {
     "package": "laravel/framework",
     "version": "v11.57.0",
@@ -10,7 +10,7 @@
   },
   "identityProposal": {
     "name": "flashasia/framework",
-    "version": "11.57.1",
+    "version": "11.57.2",
     "replaceLaravelFramework": "self.version",
     "illuminateReplaces": "all upstream component replacements preserved at self.version",
     "applicationVersion": "11.57.0 (base; distinguish own release in provenance)",
@@ -85,13 +85,18 @@
     "src/Illuminate/Foundation/resources/exceptions/renderer/scripts.js": "a4e31c672bd7168e47ebd5f2ad9807e1dc20f0fc1ff05e58279df41b34aa6e14",
     "src/Illuminate/Foundation/resources/exceptions/renderer/dist/scripts.js": "a35828a223f6b807ae8b37dc37b0b61f344fc8e8c72d0295d7bbc136e5e483e6",
     "src/Illuminate/Foundation/resources/exceptions/renderer/components/context.blade.php": "b6b9bcfbe17e60859629c04ca47a4064cdb31e71844edaf382db3bd0bb84b3be",
-    ".github/workflows/security-backports.yml": "365f7bcf6dc45b60d1f78c86d4febe961d86bc06707d6f88ac114c48c0faf2ed",
-    "SECURITY-BACKPORTS.md": "7de39a03914b88ae083303a55a026ceac393cbffbbd625a3cb98eb94408015a7",
+    ".github/workflows/security-backports.yml": "931ef9df7d829fd109ff14c822d0bbe6107cd963c499d82b3c4d7a8487ef9c43",
+    "SECURITY-BACKPORTS.md": "4f7c9aec588be482307b0ae5f65814b1c0e0c2a6e66d8afe667ad361f4f5f7d3",
     ".gitattributes": "94cfab5629d8e63304dd99c59f15377a37d8ed3ab701b0ea5ef50ba54916e7e5",
     "src/Illuminate/Foundation/Application.php": "b555ff36ac9dc5f483968cdb6af37d2cbac9e455b16bd873fc0a859684fb2273",
     "src/Illuminate/Filesystem/LocalFilesystemAdapter.php": "f8bd943cf4346ec3701d8cd869642f2d0910144418de7084c33553e5d620c2e4",
     "src/Illuminate/Filesystem/ServeFile.php": "8f4503a2860b044454a8a8f7c611378b8d303f668efaa9861bd1d7a7f64f4100",
-    "src/Illuminate/Foundation/Exceptions/Renderer/Renderer.php": "545fb64ddd50aee84c1ec509e05728ff1a15c060d4ad9364a5c0d709cdcc3ae5"
+    "src/Illuminate/Foundation/Exceptions/Renderer/Renderer.php": "545fb64ddd50aee84c1ec509e05728ff1a15c060d4ad9364a5c0d709cdcc3ae5",
+    "src/Illuminate/Concurrency/ProcessDriver.php": "3c77ba7a88c6fd0e19e5cef256ed7bb282f4b8c640e7c6a71e260fdf11a0dd89",
+    "src/Illuminate/Concurrency/Console/InvokeSerializedClosureCommand.php": "3eae55bd075d4b40a33821360674774b7806041c09928e0feefac6c9fd5f168b",
+    "tests/Security/ConcurrencyEnvelopeSecurityTest.php": "788738736173ca40d82d64cfa3d64708e5f8a9cc44aa060a96e7a7da405a5932",
+    "tests/Security/fixtures/concurrency-bootstrap.php": "ae5b194b64176564a7f6aa524b49cbe188c47eb5d36b8614df49798fab6a79a5",
+    "tests/Security/fixtures/concurrency-child.php": "9e46cb877f3ecbfc3ebcb868c7a13d2db5c6acd179ae7f809caf06c15922e1e8"
   },
   "lockSha256": "b4f0d574a034c30fecd9706450c647b04f165df6a32f9d5a12b214625d0371de",
   "advisoryRecords": [
@@ -851,5 +856,79 @@
     ],
     "fullSuiteClaim": false,
     "stableVcsConsumerProof": "pending publisher gate; current own consumer proof uses actual 11.x-dev path package"
+  },
+  "patchReleases": {
+    "11.57.2": {
+      "baseRelease": "11.57.1",
+      "baseCommit": "427218a9e84dfdd587bdabdf330d78836069b8f2",
+      "advisoryRecord": {
+        "advisoryId": "PKSA-yxbx-3c9s-cjt9",
+        "packageName": "laravel/framework",
+        "remoteId": "GHSA-63hm-g96r-2m2q",
+        "title": "Laravel: Task Output Injection - Concurrency Process",
+        "link": "https://github.com/advisories/GHSA-63hm-g96r-2m2q",
+        "cve": "CVE-2026-128083",
+        "affectedVersions": ">=13.0.0,<13.40.0|<12.71.0",
+        "source": "GitHub",
+        "reportedAt": "2026-11-13 18:54:31",
+        "composerRepository": "https://packagist.org",
+        "severity": "low",
+        "sources": [
+          {
+            "name": "GitHub",
+            "remoteId": "GHSA-63hm-g96r-2m2q"
+          }
+        ]
+      },
+      "advisoryFingerprintSha256": "ef38fa2f780f915b18390207bf4fbd6840e694028c111f76ba111627337721cf",
+      "appliesToBase": true,
+      "sourceCommits": [
+        "0f904940d176d51db1105cc925136f01bb69e92c",
+        "c37133b89b30a86eb404537151edd8944e938f0a"
+      ],
+      "disposition": "adapted upstream authenticated concurrency result envelopes to Laravel 11",
+      "runtimeFiles": [
+        "src/Illuminate/Concurrency/ProcessDriver.php",
+        "src/Illuminate/Concurrency/Console/InvokeSerializedClosureCommand.php"
+      ],
+      "testFiles": [
+        "tests/Security/ConcurrencyEnvelopeSecurityTest.php",
+        "tests/Security/fixtures/concurrency-bootstrap.php",
+        "tests/Security/fixtures/concurrency-child.php"
+      ],
+      "compatibility": {
+        "applicationVersion": "11.57.0 upstream base; Composer patch identity 11.57.2",
+        "taskResults": "Laravel 11 numeric result order preserved, including named task input",
+        "taskTransport": "Laravel 11 raw SerializableClosure transport preserved",
+        "defer": "existing fire-and-forget transport; keyless command generates local envelope key",
+        "dependencies": "composer.json byte-identical to 11.57.1; no dependency or replace changes"
+      },
+      "validation": {
+        "php84": {
+          "runtime": "8.4.27",
+          "tests": 18,
+          "assertions": 47,
+          "skipped": 0,
+          "result": "PASS",
+          "realChildProcessTests": 4
+        },
+        "baseline": {
+          "commit": "427218a9e84dfdd587bdabdf330d78836069b8f2",
+          "test": "testUnsignedResultsAreRejectedBeforeObjectDeserialization",
+          "tests": 1,
+          "failures": 1,
+          "result": "EXPECTED_FAIL: Untrusted result was accepted"
+        },
+        "retainedSecurityPhp84": {
+          "tests": 21,
+          "assertions": 177,
+          "skipped": 0,
+          "result": "PASS"
+        },
+        "php83": "NOT RUN locally; dedicated workflow required",
+        "fullSuite": "NOT RUN",
+        "applicationRelease": "NOT RUN"
+      }
+    }
   }
 }
