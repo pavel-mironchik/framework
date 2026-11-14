@@ -86,7 +86,7 @@
     "src/Illuminate/Foundation/resources/exceptions/renderer/dist/scripts.js": "a35828a223f6b807ae8b37dc37b0b61f344fc8e8c72d0295d7bbc136e5e483e6",
     "src/Illuminate/Foundation/resources/exceptions/renderer/components/context.blade.php": "b6b9bcfbe17e60859629c04ca47a4064cdb31e71844edaf382db3bd0bb84b3be",
     ".github/workflows/security-backports.yml": "657fc1cfed5d83a88f80ca1a7923e23acbfd237298585d91824d6674bbf09a57",
-    "SECURITY-BACKPORTS.md": "dd6af844b71edec84ab6553d7c40463fa0afb1eae16afc34aba0b49635d77dc0",
+    "SECURITY-BACKPORTS.md": "e32f0c81e66efd8a3bb38f9b0050f0f728cd69f2965e37bac5b76f48b14acb0b",
     ".gitattributes": "94cfab5629d8e63304dd99c59f15377a37d8ed3ab701b0ea5ef50ba54916e7e5",
     "src/Illuminate/Foundation/Application.php": "b555ff36ac9dc5f483968cdb6af37d2cbac9e455b16bd873fc0a859684fb2273",
     "src/Illuminate/Filesystem/LocalFilesystemAdapter.php": "f8bd943cf4346ec3701d8cd869642f2d0910144418de7084c33553e5d620c2e4",
@@ -95,7 +95,8 @@
     "src/Illuminate/Concurrency/ProcessDriver.php": "bb42beac549fa126358337668142e226e26e94924335ec5fd729f82171c46f2c",
     "src/Illuminate/Concurrency/Console/InvokeSerializedClosureCommand.php": "9b7ddd4f1afe075f359ff94f648aae2d07f3d43b57096806a5f96bef25b99e94",
     "tests/Integration/Concurrency/ProcessDriverSecurityTest.php": "da011997356bd950cf35ec4fbeed8927593d561ca8f2ac0675703099c1bf81fd",
-    "tests/Integration/Concurrency/Console/InvokeSerializedClosureCommandTest.php": "54896fda457f613eb25a5465652cd5e313c0a32c6661412cb6c8fd9730c5ca0b"
+    "tests/Integration/Concurrency/Console/InvokeSerializedClosureCommandTest.php": "54896fda457f613eb25a5465652cd5e313c0a32c6661412cb6c8fd9730c5ca0b",
+    "tests/Integration/Concurrency/ProcessDriverChildSecurityTest.php": "640b54f5113fea485143b5ac2ca4a025101309fb22986e6e0531fed22785687b"
   },
   "lockSha256": "b4f0d574a034c30fecd9706450c647b04f165df6a32f9d5a12b214625d0371de",
   "advisoryRecords": [
@@ -866,13 +867,14 @@
     "disposition": "adapted HMAC result authentication; raw closure transport and numeric result contract preserved",
     "inventoryPolicy": "advisoryRecords and validation above are historical evidence for the base release; fresh consuming inventory and new immutable version require separate adoption review",
     "validation": {
-      "php82Concurrency": "23 tests / 37 assertions / 5 upstream OS skips on Windows",
+      "php82Concurrency": "24 tests / 37 assertions / 6 OS skips on Windows; includes new Linux-only real-child regression skipped on this host",
       "php83php84Linux": "pending dedicated workflow",
       "fullSuite": "NOT RUN",
       "published": false,
       "priorSecurityPhp82": "52 tests / 226 assertions / 8 skips / 1 ServeFile delimiter failure; same failure reproduced with unchanged 11.57.1 runtime (1 test / 5 assertions); not a clean broader security run",
       "regressionBaseline": "unsigned complete result regression fails on 11.57.1 runtime: unsigned result was accepted",
-      "localDependencyResolution": "COMPOSER_ROOT_VERSION=11.x-dev for local feature branch only; PHP 8.2.33 with actual gmp/ftp extensions; no security or platform bypass; no committed lock or version alias"
+      "localDependencyResolution": "COMPOSER_ROOT_VERSION=11.x-dev for local feature branch only; PHP 8.2.33 with actual gmp/ftp extensions; no security or platform bypass; no committed lock or version alias",
+      "realChildLinux": "pending PHP 8.3/8.4 CI; verifies distinct child PID, no key in SERVER/ENV/getenv, noisy stdout and forged frame ignored before authenticated result"
     }
   }
 }

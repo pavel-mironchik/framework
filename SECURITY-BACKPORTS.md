@@ -18,6 +18,11 @@ backport does not claim the published exploit works unchanged on 11.x. It closes
 the underlying unauthenticated result channel. Regression tests cover unsigned
 object results, invalid signatures, cross-task replay, noisy output, environment
 key removal, command success/failure, and the existing result contract.
+The Linux-only `ProcessDriverChildSecurityTest` also launches a real PHP child:
+it verifies a distinct process ID, removal of the key from `$_SERVER`, `$_ENV`
+and `getenv`, and the authentic result after noisy stdout and forged frames.
+Its execution remains a Linux CI gate; the local Windows run verifies its
+syntax and expected platform skip, not its subprocess behavior.
 
 Release gates remain independent review, PHP 8.3/8.4 Linux concurrency and existing
 security CI, new immutable patch publication, and consuming application lock,
