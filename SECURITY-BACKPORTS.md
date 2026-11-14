@@ -1,4 +1,48 @@
-# Laravel 11 security backport candidate
+# Maintained Laravel 11 security backports
+
+## Patch candidate 11.57.2: authenticated concurrency results
+
+This patch retains the Laravel 11.57.0 API/dependency base and every 11.57.1
+backport. It addresses CVE-2026-128083 / GHSA-63hm-g96r-2m2q /
+PKSA-yxbx-3c9s-cjt9 without upgrading to Laravel 12 or 13. Publication and
+independent review are still pending. Application::VERSION remains the upstream
+base version; Composer release identity is flashasia/framework 11.57.2.
+
+The result-envelope fix is adapted from official Laravel 12 commit
+`0f904940d176d51db1105cc925136f01bb69e92c` and Laravel 13 commit
+`c37133b89b30a86eb404537151edd8944e938f0a`. Each child has a fresh random HMAC key;
+the command removes it from all three environment views before invoking the
+task. The parent verifies the signed envelope before deserializing any return
+value or constructing any exception. Unauthenticated output and replayed
+envelopes cannot replace a result. Normal noisy task output remains supported.
+The adaptation preserves Laravel 11's numeric task-result order, its existing
+raw serialized-closure transport, and fire-and-forget defer behavior. It does
+not import later base64 task transport or named-result API changes.
+
+The new advisory record is appended under patchReleases["11.57.2"] in
+security-backports.json. The original 30-record adoption inventory, its counts,
+and the historical TokenGuard advisory range remain unchanged. Consumers must
+apply the previously reviewed TokenGuard range revision and the new patch
+record when checking the current 31-record original-identity inventory.
+An empty advisory result for unpublished illuminate/concurrency does not mean
+that the framework's bundled concurrency implementation is unaffected.
+
+Local PHP 8.4.27 validation: 18 concurrency tests / 47 assertions, no skips,
+including real child processes for values, untrusted output, exceptions and
+keyless deferred-command execution. The exact two candidate runtime paths are
+asserted. A dependency-only external vendor directory supplies libraries; it
+does not supply the tested concurrency classes. The same unsigned-result
+regression fails against the two unchanged 11.57.1 runtime files, proving
+sensitivity before deserialization. Retained token/mail/security checks pass
+21 tests / 177 assertions. PHP 8.3, full Testbench integration, the complete
+framework suite and production deployment have not been run locally.
+
+The dedicated workflow retains the older security/signing/routing gates and
+adds a separate concurrency command and concurrency.xml evidence for both
+PHP 8.3 and 8.4. No dependency constraints, replacement identities, Composer
+security policy or existing archives are changed.
+
+## Historical 11.57.1 adoption record
 
 Unreleased candidate based on official Laravel v11.57.0, commit
 `4fc41929c95024795d83a54309aa4e9922f74263`, MIT license retained.
