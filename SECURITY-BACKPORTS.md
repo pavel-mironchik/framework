@@ -1,4 +1,32 @@
-# Laravel 11 security backport candidate
+# Concurrency result authentication candidate
+
+This unpublished change starts from `flashasia/framework` 11.57.1, commit
+`427218a9e84dfdd587bdabdf330d78836069b8f2`. It adapts upstream security fix
+`0f904940d176d51db1105cc925136f01bb69e92c` for GHSA-63hm-g96r-2m2q
+(CVE-2026-128083 / PKSA-yxbx-3c9s-cjt9). No tag is created or moved.
+
+Each process task receives an independent random HMAC key. The child removes
+the key from its environment before invoking the closure and signs its result;
+the parent verifies the signature before decoding or deserializing the result.
+The Laravel 11 raw serialized closure transport and numeric result ordering are
+preserved, including for associative input tasks. This does not import newer
+Laravel keyed-result or base64 closure transport behavior.
+
+The published affected range includes 11.57.1. The old 11.x implementation lacks
+the newer gzip-output truncation in the published exploitation scenario, so this
+backport does not claim the published exploit works unchanged on 11.x. It closes
+the underlying unauthenticated result channel. Regression tests cover unsigned
+object results, invalid signatures, cross-task replay, noisy output, environment
+key removal, command success/failure, and the existing result contract.
+
+Release gates remain independent review, PHP 8.3/8.4 Linux concurrency and existing
+security CI, new immutable patch publication, and consuming application lock,
+registry, critical-file pins and guard updates. No advisory suppression or
+consumer guard change is part of this candidate. The historical evidence below
+and the historical inventory in `security-backports.json` describe the previous
+release; `pendingBackport` records the new candidate separately.
+
+# Historical Laravel 11 security backport evidence
 
 Unreleased candidate based on official Laravel v11.57.0, commit
 `4fc41929c95024795d83a54309aa4e9922f74263`, MIT license retained.

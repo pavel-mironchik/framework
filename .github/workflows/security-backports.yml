@@ -39,6 +39,8 @@ jobs:
         run: php vendor/bin/phpunit --bootstrap vendor/autoload.php --log-junit security.xml tests/Auth/AuthTokenGuardTest.php tests/Integration/Filesystem/ServeFileTest.php tests/Security
       - name: Signed route integration
         run: php vendor/bin/phpunit --bootstrap vendor/autoload.php --log-junit signing.xml tests/Integration/Routing/UrlSigningTest.php
+      - name: Authenticated concurrency results and compatibility
+        run: php vendor/bin/phpunit --bootstrap vendor/autoload.php --log-junit concurrency.xml tests/Integration/Concurrency
       - name: Bounded route generation compatibility
         run: php vendor/bin/phpunit --bootstrap vendor/autoload.php --log-junit routing.xml --filter 'testBasicRouteGeneration|testRoutableInterface|testRoutesWithDomains|testSigned|testRouteParametersContaining' tests/Routing/RoutingUrlGeneratorTest.php
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
@@ -48,4 +50,5 @@ jobs:
           path: |
             security.xml
             signing.xml
+            concurrency.xml
             routing.xml

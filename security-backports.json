@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "status": "unreleased own-identity 11.x-dev candidate; browser proof passed for default renderer; independent review and publication pending",
+  "status": "unpublished concurrency security candidate from 11.57.1; historical inventory and validation retained; release review pending",
   "upstream": {
     "package": "laravel/framework",
     "version": "v11.57.0",
@@ -85,13 +85,17 @@
     "src/Illuminate/Foundation/resources/exceptions/renderer/scripts.js": "a4e31c672bd7168e47ebd5f2ad9807e1dc20f0fc1ff05e58279df41b34aa6e14",
     "src/Illuminate/Foundation/resources/exceptions/renderer/dist/scripts.js": "a35828a223f6b807ae8b37dc37b0b61f344fc8e8c72d0295d7bbc136e5e483e6",
     "src/Illuminate/Foundation/resources/exceptions/renderer/components/context.blade.php": "b6b9bcfbe17e60859629c04ca47a4064cdb31e71844edaf382db3bd0bb84b3be",
-    ".github/workflows/security-backports.yml": "365f7bcf6dc45b60d1f78c86d4febe961d86bc06707d6f88ac114c48c0faf2ed",
-    "SECURITY-BACKPORTS.md": "7de39a03914b88ae083303a55a026ceac393cbffbbd625a3cb98eb94408015a7",
+    ".github/workflows/security-backports.yml": "657fc1cfed5d83a88f80ca1a7923e23acbfd237298585d91824d6674bbf09a57",
+    "SECURITY-BACKPORTS.md": "dd6af844b71edec84ab6553d7c40463fa0afb1eae16afc34aba0b49635d77dc0",
     ".gitattributes": "94cfab5629d8e63304dd99c59f15377a37d8ed3ab701b0ea5ef50ba54916e7e5",
     "src/Illuminate/Foundation/Application.php": "b555ff36ac9dc5f483968cdb6af37d2cbac9e455b16bd873fc0a859684fb2273",
     "src/Illuminate/Filesystem/LocalFilesystemAdapter.php": "f8bd943cf4346ec3701d8cd869642f2d0910144418de7084c33553e5d620c2e4",
     "src/Illuminate/Filesystem/ServeFile.php": "8f4503a2860b044454a8a8f7c611378b8d303f668efaa9861bd1d7a7f64f4100",
-    "src/Illuminate/Foundation/Exceptions/Renderer/Renderer.php": "545fb64ddd50aee84c1ec509e05728ff1a15c060d4ad9364a5c0d709cdcc3ae5"
+    "src/Illuminate/Foundation/Exceptions/Renderer/Renderer.php": "545fb64ddd50aee84c1ec509e05728ff1a15c060d4ad9364a5c0d709cdcc3ae5",
+    "src/Illuminate/Concurrency/ProcessDriver.php": "bb42beac549fa126358337668142e226e26e94924335ec5fd729f82171c46f2c",
+    "src/Illuminate/Concurrency/Console/InvokeSerializedClosureCommand.php": "9b7ddd4f1afe075f359ff94f648aae2d07f3d43b57096806a5f96bef25b99e94",
+    "tests/Integration/Concurrency/ProcessDriverSecurityTest.php": "da011997356bd950cf35ec4fbeed8927593d561ca8f2ac0675703099c1bf81fd",
+    "tests/Integration/Concurrency/Console/InvokeSerializedClosureCommandTest.php": "54896fda457f613eb25a5465652cd5e313c0a32c6661412cb6c8fd9730c5ca0b"
   },
   "lockSha256": "b4f0d574a034c30fecd9706450c647b04f165df6a32f9d5a12b214625d0371de",
   "advisoryRecords": [
@@ -851,5 +855,24 @@
     ],
     "fullSuiteClaim": false,
     "stableVcsConsumerProof": "pending publisher gate; current own consumer proof uses actual 11.x-dev path package"
+  },
+  "pendingBackport": {
+    "advisoryId": "PKSA-yxbx-3c9s-cjt9",
+    "ghsa": "GHSA-63hm-g96r-2m2q",
+    "cve": "CVE-2026-128083",
+    "source": "0f904940d176d51db1105cc925136f01bb69e92c",
+    "baseRelease": "11.57.1",
+    "baseCommit": "427218a9e84dfdd587bdabdf330d78836069b8f2",
+    "disposition": "adapted HMAC result authentication; raw closure transport and numeric result contract preserved",
+    "inventoryPolicy": "advisoryRecords and validation above are historical evidence for the base release; fresh consuming inventory and new immutable version require separate adoption review",
+    "validation": {
+      "php82Concurrency": "23 tests / 37 assertions / 5 upstream OS skips on Windows",
+      "php83php84Linux": "pending dedicated workflow",
+      "fullSuite": "NOT RUN",
+      "published": false,
+      "priorSecurityPhp82": "52 tests / 226 assertions / 8 skips / 1 ServeFile delimiter failure; same failure reproduced with unchanged 11.57.1 runtime (1 test / 5 assertions); not a clean broader security run",
+      "regressionBaseline": "unsigned complete result regression fails on 11.57.1 runtime: unsigned result was accepted",
+      "localDependencyResolution": "COMPOSER_ROOT_VERSION=11.x-dev for local feature branch only; PHP 8.2.33 with actual gmp/ftp extensions; no security or platform bypass; no committed lock or version alias"
+    }
   }
 }
